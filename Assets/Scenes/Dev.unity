@@ -135,6 +135,9 @@ GameObject:
   - component: {fileID: 33375529}
   - component: {fileID: 33375528}
   - component: {fileID: 33375527}
+  - component: {fileID: 33375533}
+  - component: {fileID: 33375532}
+  - component: {fileID: 33375531}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -156,9 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: c82f3bb889fc226409064ba2a8cae0c5,
     type: 2}
-  m_MaxNumberOfMovingImages: 1
-  m_TrackedImagePrefab: {fileID: 8347032502207345964, guid: 485d662c63590f74dac20be0cf684019,
-    type: 3}
+  m_MaxNumberOfMovingImages: 0
+  m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &33375528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +207,51 @@ Transform:
   - {fileID: 1060944045}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &33375531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33375526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa9f9f78f2718b41893a35345da20a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _placedObject:
+  - {fileID: 1832099763822296249, guid: 2c632dacd6a4ded419c55c0e3225ae05, type: 3}
+  - {fileID: 1672479746399595951, guid: 11d7b4d84a133b347bb73617242c2104, type: 3}
+  - {fileID: 7924775962727592774, guid: 0dc99dd8ffaa37b48b913428d1860205, type: 3}
+  _referenceImageLibrary: {fileID: 11400000, guid: c82f3bb889fc226409064ba2a8cae0c5,
+    type: 2}
+--- !u!114 &33375532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33375526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e624a65f79792d64799c2e4b723947f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _imageManager: {fileID: 33375527}
+--- !u!114 &33375533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33375526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7ce4a4acc743946a71dfb895dd066c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _imageTrackingManager: {fileID: 33375532}
+  _placedObjectProvider: {fileID: 33375531}
 --- !u!1 &75470706
 GameObject:
   m_ObjectHideFlags: 0
