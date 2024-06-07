@@ -3,18 +3,17 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class Client : MonoBehaviour
+public class PlacedObjectManager : MonoBehaviour
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [SerializeField] private MultiImageTrackingManager _imageTrackingManager;
-    
+
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [SerializeField] private PlacedObjectProvider _placedObjectProvider;
-
 
     // Start is called before the first frame update
     void Start()
@@ -40,16 +39,13 @@ public class Client : MonoBehaviour
 
     private void SetActiveObject(ARTrackedImage trackedImage)
     {
-        //認識した画像マーカーの名前を使って辞書から任意のオブジェクトを引っ張り出す
         var arObject = _placedObjectProvider.MakerNamePlacedObjectMap[trackedImage.referenceImage.name];
         var imageMarkerTransform = trackedImage.transform;
-
-        //位置合わせ
-        var markerFrontRotation = imageMarkerTransform.rotation * Quaternion.Euler(0f, 0f, 0f);
+        
+        var markerFrontRotation = imageMarkerTransform.rotation * Quaternion.identity;
         arObject.transform.SetPositionAndRotation(imageMarkerTransform.transform.position, markerFrontRotation);
         arObject.transform.SetParent(imageMarkerTransform);
-
-        //トラッキングの状態に応じてARオブジェクトの表示を切り替え
+        
         arObject.SetActive(trackedImage.trackingState == TrackingState.Tracking);
     }
 }
