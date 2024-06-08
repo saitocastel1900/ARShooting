@@ -11,6 +11,9 @@ public class MouseInputProvider : IInputEventProvider, IInitializable, IDisposab
     public IReadOnlyReactiveProperty<bool> InputTapPush => _inputTapPush;
     private BoolReactiveProperty _inputTapPush=new BoolReactiveProperty();
     
+    public IReadOnlyReactiveProperty<Vector3> InputTapPosition => _inputTapPosition;
+    private Vector3ReactiveProperty _inputTapPosition=new Vector3ReactiveProperty();
+    
     /// <summary>
     /// 
     /// </summary>
@@ -27,6 +30,10 @@ public class MouseInputProvider : IInputEventProvider, IInitializable, IDisposab
             .Where(_ => Input.GetMouseButtonDown(0))
             .Select(_ => true)
             .Subscribe(_inputTapPush.SetValueAndForceNotify).AddTo(_compositeDisposable);
+        
+        _inputTapPush
+            .Select(_ =>Input.mousePosition)
+            .Subscribe(_inputTapPosition.SetValueAndForceNotify).AddTo(_compositeDisposable);
     }
 
     public void Dispose()
