@@ -1,9 +1,13 @@
 using UnityEngine;
 
-public class Target : MonoBehaviour , IBreakable
+public class Target : MonoBehaviour, IHitable
 {
-    public void Break()
+    [SerializeField] private ParticleSystem _particle;
+
+    public void Hit(Vector3 position)
     {
-        Destroy(gameObject);
+       var effect = Instantiate(_particle, position, Quaternion.identity);
+       effect.Play();
+       this.gameObject.SetActive(false);
     }
 }
