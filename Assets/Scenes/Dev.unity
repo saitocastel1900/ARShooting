@@ -1045,6 +1045,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &649227522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 649227525}
+  - component: {fileID: 649227524}
+  - component: {fileID: 649227523}
+  m_Layer: 0
+  m_Name: EfectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &649227523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649227522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 649227524}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
+--- !u!114 &649227524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649227522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f9368a2e9f76f649afefb6c4ffa9f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectPrefab: {fileID: -3699258449412166548, guid: 0ceca4d39b93c574f835c1e8ae7facff,
+    type: 3}
+--- !u!4 &649227525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649227522}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &999777670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,9 +1938,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c708a6ec59bdd154792eb9b31f640cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 8554694260190035306, guid: e4600d1f3dcafd74b8b8c77e785a9a4e,
+  _bulletPrefab: {fileID: -4926603943163643780, guid: e4600d1f3dcafd74b8b8c77e785a9a4e,
     type: 3}
-  _bulletSpeed: 20
+  _hierarchyTransform: {fileID: 0}
+  _shotPower: 20
 --- !u!4 &1363947585
 Transform:
   m_ObjectHideFlags: 0
@@ -2198,3 +2264,4 @@ SceneRoots:
   - {fileID: 522501563}
   - {fileID: 1363947585}
   - {fileID: 999777672}
+  - {fileID: 649227525}
