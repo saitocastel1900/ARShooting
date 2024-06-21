@@ -9,7 +9,7 @@ public class MultiImageTrackingManager : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public IObservable<ARTrackedImagesChangedEventArgs> OnImageTrackingCallBack => _imageTrackingSubject;
+    public IObservable<ARTrackedImagesChangedEventArgs> OnImageTracking => _imageTrackingSubject;
     private Subject<ARTrackedImagesChangedEventArgs> _imageTrackingSubject = new Subject<ARTrackedImagesChangedEventArgs>();
 
     /// <summary>
