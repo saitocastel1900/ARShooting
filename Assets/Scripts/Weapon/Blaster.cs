@@ -19,6 +19,11 @@ public class Blaster : MonoBehaviour
     /// </summary>
     [Inject] private IInputEventProvider _inputEventProvider;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [Inject] private AudioManager _audioManager;
+    
     private void Start()
     {
         _inputEventProvider.InputTapPosition
@@ -27,6 +32,8 @@ public class Blaster : MonoBehaviour
             {
                 _bullet.GenerateBullet(Camera.main.ScreenToWorldPoint(screenPosition),
                     Camera.main.ScreenPointToRay(screenPosition).direction, _shotPower);
+                
+                _audioManager.PlaySoundEffect(SoundEffect.Select1);
             })
             .AddTo(this);
     }
