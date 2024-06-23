@@ -79,4 +79,9 @@ Assets/Resources.meta
 Assets/Resources/*
 Assets/Plugins/*
 Assets/StreamingAssets/*
+Assets/StreamingAssets.meta
+Assets/CRIData/*
+Assets/CRIMW.meta
+
+Assets/CRIData.meta
 Assets/CRIMW/*
