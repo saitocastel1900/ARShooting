@@ -11,7 +11,7 @@ using UnityEngine;
         private void Start()
         {
             _foamBulletCore = this.gameObject.GetComponent<FoamBulletCore>();
-            _foamBulletCore.OnInitializeAsync.Subscribe(_=>OnInitialize()).AddTo(this);
+            _foamBulletCore.OnInitialized.Subscribe(_=>OnInitialize()).AddTo(this);
             
             OnStart();
         }

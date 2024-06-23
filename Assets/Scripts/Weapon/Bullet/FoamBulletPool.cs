@@ -6,20 +6,20 @@ public class FoamBulletPool : ObjectPool<FoamBulletCore>
     /// <summary>
     /// 
     /// </summary>
-    private readonly Transform _parenTransform;
-    
-    /// <summary>
-    /// 
-    /// </summary>
     private readonly FoamBulletCore _prefab;
 
     /// <summary>
     /// 
     /// </summary>
-    public FoamBulletPool(Transform parenTransform, FoamBulletCore prefab)
+    private readonly Transform _parenTransform;
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public FoamBulletPool(FoamBulletCore prefab, Transform parenTransform)
     {
-        _parenTransform = parenTransform;
         _prefab = prefab;
+        _parenTransform = parenTransform;
     }
 
     /// <summary>
@@ -28,6 +28,6 @@ public class FoamBulletPool : ObjectPool<FoamBulletCore>
     /// <returns></returns>
     protected override FoamBulletCore CreateInstance()
     {
-        return  FoamBulletCore.Instantiate(_prefab,_parenTransform);
+        return FoamBulletCore.Instantiate(_prefab, _parenTransform);
     }
 }

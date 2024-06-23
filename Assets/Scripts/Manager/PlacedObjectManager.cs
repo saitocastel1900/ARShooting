@@ -19,7 +19,7 @@ public class PlacedObjectManager : MonoBehaviour
     void Start()
     {
         _imageTrackingManager
-            .OnImageTrackingCallBack
+            .OnImageTracking
             .Subscribe(OnTrackedImagesChanged)
             .AddTo(this.gameObject);
     }

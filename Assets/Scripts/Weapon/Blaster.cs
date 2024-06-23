@@ -1,5 +1,4 @@
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
@@ -8,13 +7,8 @@ public class Blaster : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    [SerializeField] private FoamBulletCore _bulletPrefab;
+    [SerializeField] private FoamBulletGenerator _bullet;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [SerializeField] private Transform _hierarchyTransform;
-    
     /// <summary>
     /// 
     /// </summary>
@@ -28,24 +22,18 @@ public class Blaster : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    private FoamBulletPool _pool;
-
+    [Inject] private AudioManager _audioManager;
+    
     private void Start()
     {
-        _pool = new FoamBulletPool(_hierarchyTransform, _bulletPrefab);
-
-        this.OnDestroyAsObservable().Subscribe(_ => _pool.Dispose());
-        
         _inputEventProvider.InputTapPosition
             .SkipLatestValueOnSubscribe()
             .Subscribe(screenPosition =>
             {
-                var bullet = _pool.Rent();
-                bullet.transform.position = Camera.main.ScreenToWorldPoint(screenPosition);
-
-                Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-                bullet.InitializeFoamBullet(ray.direction, _shotPower);
-                bullet.OnCallBack.Subscribe(_ => _pool.Return(bullet));
+                _bullet.GenerateBullet(Camera.main.ScreenToWorldPoint(screenPosition),
+                    Camera.main.ScreenPointToRay(screenPosition).direction, _shotPower);
+                
+                _audioManager.PlaySoundEffect(SoundEffect.Select1);
             })
             .AddTo(this);
     }
