@@ -78,3 +78,5 @@ Assets/ExternalAssets/*
 Assets/Resources.meta
 Assets/Resources/*
 Assets/Plugins/*
+Assets/StreamingAssets/*
+Assets/CRIMW/*
