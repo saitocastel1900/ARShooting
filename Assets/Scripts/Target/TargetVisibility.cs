@@ -1,7 +1,7 @@
 using UniRx;
 using UnityEngine;
 
-public class TargetHide : MonoBehaviour
+public class TargetVisibility : MonoBehaviour
 {
     [SerializeField] private TargetCore _core;
   
@@ -9,7 +9,8 @@ public class TargetHide : MonoBehaviour
     {
         _core.IsHit 
             .SkipLatestValueOnSubscribe()
-            .Subscribe(_ => this.gameObject.SetActive(false))
+            .Select(_=>false)
+            .Subscribe(this.gameObject.SetActive)
             .AddTo(this.gameObject);
     }
 }
