@@ -21,6 +21,6 @@ public class RemainingTargetCounterTextView : MonoBehaviour
     /// </summary>
     public void SetText(int remainingTargetCount)
     {
-        _text.text = remainingTargetCount.ToString();
+        _text.text = $"あと{remainingTargetCount}こ";
     }
 }
