@@ -11,7 +11,7 @@ public class TargetAudio : MonoBehaviour
     {
         _core.IsHit
             .SkipLatestValueOnSubscribe()
-            .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.Select1))
+            .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.Hit1))
             .AddTo(this);
     }
 }
