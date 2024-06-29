@@ -10,7 +10,7 @@ namespace Commons.Utility
         public static void LogError(string message)
         {
 #if UNITY_EDITOR
-            Debug.LogError(message);
+            Debug.LogError($"<color=magenta>{message}</color>");
 #endif
         }
 
@@ -21,7 +21,7 @@ namespace Commons.Utility
         {
             {
 #if UNITY_EDITOR
-                Debug.Log(message);
+                Debug.Log($"<color=green>{message}</color>");
 #endif
             }
         }
