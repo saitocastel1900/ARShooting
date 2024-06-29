@@ -2,7 +2,6 @@ using System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
 
 public class MultiImageTrackingManager : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class MultiImageTrackingManager : MonoBehaviour
     
     private void Start()
     {
-        var s = Observable.FromEvent<ARTrackedImagesChangedEventArgs>(
+        Observable.FromEvent<ARTrackedImagesChangedEventArgs>(
             handler => _imageManager.trackedImagesChanged += handler,
             handler => _imageManager.trackedImagesChanged -= handler
         ).Subscribe(_imageTrackingSubject.OnNext).AddTo(this.gameObject);
