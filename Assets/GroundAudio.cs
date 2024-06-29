@@ -2,16 +2,16 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
-public class GroundEffect : MonoBehaviour
+public class GroundAudio : MonoBehaviour
 {
     [SerializeField] private GroundCore _core;
-    [Inject] private GroundHitEffectGenerator _effect;
-    
+    [Inject] AudioManager _audioManager;
+
     private void Start()
     {
         _core.IsHit
             .SkipLatestValueOnSubscribe()
-            .Subscribe(_effect.GenerateEffect)
+            .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.Hit2))
             .AddTo(this);
     }
 }

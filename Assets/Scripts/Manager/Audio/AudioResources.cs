@@ -5,6 +5,7 @@
     public enum BGM
     {
         BGM1 = 0,
+        BGM2 = 1,
     }
 
     /// <summary>
@@ -12,6 +13,12 @@
     /// </summary>
     public enum SoundEffect
     {
-        Select1 = 0,
+        WidgetSelect = 1001,
        
+        Hit1 = 2001,
+        Hit2 = 2002,
+        
+        Shot = 3001,
+        
+        Clear = 4001,
     }

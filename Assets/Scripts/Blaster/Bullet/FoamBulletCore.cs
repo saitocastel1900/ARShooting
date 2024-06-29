@@ -8,8 +8,8 @@ public class FoamBulletCore : MonoBehaviour
     /// <summary>
     /// 初期化したか
     /// </summary>
-    public IObservable<Unit> OnInitialized => _initializeSubject;
-    private readonly ReplaySubject<Unit> _initializeSubject = new ReplaySubject<Unit>();
+    public IReactiveProperty<bool> IsInitialized => _isInitialized;
+    private readonly BoolReactiveProperty _isInitialized = new BoolReactiveProperty(false);
 
     /// <summary>
     /// 
@@ -38,13 +38,22 @@ public class FoamBulletCore : MonoBehaviour
             .AddTo(this.gameObject);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <param name="velocity"></param>
+    /// <returns></returns>
     public IObservable<Unit> InitializeFoamBullet(Vector3 direction, float velocity)
     {
         _direction = direction;
         _velocity = velocity;
-        _initializeSubject.OnNext(Unit.Default);
-        _initializeSubject.AddTo(this.gameObject);
+        _isInitialized.Value = true;
+        _isInitialized.AddTo(this.gameObject);
         
-        return this.gameObject.OnBecameInvisibleAsObservable();
+        return this.gameObject
+            .OnBecameInvisibleAsObservable()
+            .FirstOrDefault()
+            .Do(_ => _isInitialized.Value = false);
    }
 }
