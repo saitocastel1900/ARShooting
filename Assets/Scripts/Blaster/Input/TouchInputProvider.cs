@@ -38,6 +38,7 @@ public class TouchInputProvider : IInputEventProvider,IInitializable,IDisposable
             .Subscribe(_inputTapPush.SetValueAndForceNotify).AddTo(_compositeDisposable);
         
         _inputTapPush
+            .Where(_ => Input.touchCount > 0)
             .Select(_ =>(Vector3)(Input.GetTouch(0).position))
             .Subscribe(_inputTapPosition.SetValueAndForceNotify).AddTo(_compositeDisposable);
     }
