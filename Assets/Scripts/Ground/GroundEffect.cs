@@ -1,12 +1,17 @@
+using UniRx;
 using UnityEngine;
 using Zenject;
 
-public class GroundEffect : MonoBehaviour , IHitable
+public class GroundEffect : MonoBehaviour
 {
+    [SerializeField] private GroundCore _core;
     [Inject] private GroundHitEffectGenerator _effect;
     
-    public void Hit(Vector3 position)
+    private void Start()
     {
-        _effect.GenerateEffect(position);
+        _core.IsHit
+            .SkipLatestValueOnSubscribe()
+            .Subscribe(_effect.GenerateEffect)
+            .AddTo(this);
     }
 }
