@@ -1,4 +1,3 @@
-using Commons.Utility;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -23,7 +22,10 @@ public class FoamBulletGenerator : MonoBehaviour
     private void Start()
     {
         _pool = new FoamBulletPool(_bulletPrefab,_hierarchyTransform);
-        this.OnDestroyAsObservable().Subscribe(_ => _pool.Dispose());
+        
+        this.gameObject
+            .OnDestroyAsObservable()
+            .Subscribe(_ => _pool.Dispose());
     }
 
     /// <summary>
@@ -32,15 +34,12 @@ public class FoamBulletGenerator : MonoBehaviour
     public void GenerateBullet(Vector3 position,Vector3 direction, float velocity)
     {
         var bullet = _pool.Rent();
+        
         bullet.transform.position = position;
         
         bullet
             .InitializeFoamBullet(direction,velocity)
-            .Subscribe(_ =>
-            {
-                _pool.Return(bullet);
-                DebugUtility.Log("返りました");
-            })
+            .Subscribe(_ => _pool.Return(bullet))
             .AddTo(this.gameObject);
     }
 }
