@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 12232915927475440196
       m_GuidHigh: 852850176874727368
-    m_Size: {x: 0.07, y: 0.07}
+    m_Size: {x: 0.5, y: 0.5}
     m_SpecifySize: 1
     m_Name: Archery
-    m_Texture: {fileID: 0}
+    m_Texture: {fileID: 2800000, guid: 28644a440c39a9c4c8473f9fb7eed50b, type: 3}

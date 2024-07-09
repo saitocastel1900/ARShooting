@@ -29,11 +29,13 @@ public class PlacedObjectManager : MonoBehaviour
         foreach (var trackedImage in eventArgs.added)
         {
             SetActiveObject(trackedImage);
+            Debug.Log(trackedImage.trackingState);
         }
 
         foreach (var trackedImage in eventArgs.updated)
         {
             SetActiveObject(trackedImage);
+            Debug.Log(trackedImage.trackingState);
         }
     }
 

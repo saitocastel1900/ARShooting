@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5353415830807502615}
   - component: {fileID: 3051207373267011192}
   - component: {fileID: 3513068116647042750}
-  - component: {fileID: 2795055663089732406}
   - component: {fileID: 8655775029478538041}
   m_Layer: 5
   m_Name: RemainingTargetCounterText
@@ -150,19 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 3051207373267011192}
---- !u!114 &2795055663089732406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5387252132134222178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba1519ed9ae19a479d1595495b5a6a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _remainingTargetCount: 3
 --- !u!114 &8655775029478538041
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,8 @@ public class GroundEffect : MonoBehaviour
     
     private void Start()
     {
-        _core.IsHit
+        _core
+            .HitPosProp
             .SkipLatestValueOnSubscribe()
             .Subscribe(_effect.GenerateEffect)
             .AddTo(this);
