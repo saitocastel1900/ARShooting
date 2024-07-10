@@ -4,14 +4,17 @@ using Zenject;
 
 public class TargetCore : MonoBehaviour, IHitable
 {
-    public IReactiveProperty<Vector3> IsHit => _isHit;
-    private Vector3ReactiveProperty _isHit = new Vector3ReactiveProperty(Vector3.zero);
+    /// <summary>
+    /// 
+    /// </summary>
+    public IReactiveProperty<Vector3> HitPosProp => _hitPosProp;
+    private Vector3ReactiveProperty _hitPosProp = new Vector3ReactiveProperty(Vector3.zero);
 
     [Inject] private RemainingTargetCounterTextPresenter _remainingTargetCounter;
 
     private void Start()
     {
-        _isHit
+        _hitPosProp
             .SkipLatestValueOnSubscribe()
             .Subscribe(position => _remainingTargetCounter.Decrement())
             .AddTo(this);
@@ -19,6 +22,6 @@ public class TargetCore : MonoBehaviour, IHitable
 
     public void Hit(Vector3 position)
     {
-        _isHit.Value = position;
+        _hitPosProp.Value = position;
     }
 }

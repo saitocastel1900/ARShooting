@@ -1,4 +1,3 @@
-using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -20,8 +19,14 @@ public class LightSourceEstimationManager : MonoBehaviour
       /// </summary>
       private float? _averageBrightness;
 
+      /// <summary>
+      /// 
+      /// </summary>
       private float? _averageColorTemperature;
       
+      /// <summary>
+      /// 
+      /// </summary>
       private Color? _colorCorrection;
 
       /// <summary>
@@ -40,27 +45,33 @@ public class LightSourceEstimationManager : MonoBehaviour
       /// </summary>
       private void SetVirtualLight(ARCameraFrameEventArgs eventArgs)
       {
+         Color color = Color.white;
+         float intensity = 1.0f;
          var lightEst = eventArgs.lightEstimation;
-         
-         //環境光
+
+         // 環境光
          _averageBrightness = lightEst.averageBrightness;
          if (_averageBrightness.HasValue)
          {
-            _directionLight.intensity = _averageBrightness.Value;
+            intensity = Mathf.Clamp(_averageBrightness.Value, 0f, 1f);
          }
 
-         //色温度
+         // 色温度
          _averageColorTemperature = lightEst.averageColorTemperature;
          if (_averageColorTemperature.HasValue)
          {
-            _directionLight.colorTemperature = _averageColorTemperature.Value;
+            color = Mathf.CorrelatedColorTemperatureToRGB(_averageColorTemperature.Value);
          }
-         
-         //色補正
+
+         // 色補正
          _colorCorrection = lightEst.colorCorrection;
          if (_colorCorrection.HasValue)
          {
-            _directionLight.color = _colorCorrection.Value;
+            color *= _colorCorrection.Value;
          }
+
+         Color estimatedLightColor  = color * intensity;
+         _directionLight.color = estimatedLightColor ;
+         RenderSettings.ambientSkyColor = estimatedLightColor ;
       }
 }

@@ -14,7 +14,8 @@ public class TargetEffect : MonoBehaviour, IHitable
 
     private void Start()
     {
-        _core.IsHit
+        _core
+            .HitPosProp
             .SkipLatestValueOnSubscribe()
             .Subscribe(position =>
             {

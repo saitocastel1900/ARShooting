@@ -1,4 +1,5 @@
 using System;
+using Commons.Utility;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -14,6 +15,12 @@ public class FoamBulletCore : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
+    public IReactiveProperty<bool> IsHitProp => _isHitProp;
+    private BoolReactiveProperty _isHitProp = new BoolReactiveProperty(false);
+
+    /// <summary>
+    /// 
+    /// </summary>
     public Vector3 Direction => _direction;
     private Vector3 _direction;
 
@@ -24,7 +31,7 @@ public class FoamBulletCore : MonoBehaviour
     private float _velocity;
 
     private void Start()
-    { 
+    {
         this.gameObject
             .OnCollisionEnterAsObservable()
             .Subscribe(hit =>
@@ -33,6 +40,7 @@ public class FoamBulletCore : MonoBehaviour
                 if (hitable != null)
                 {
                     hitable.Hit(hit.contacts[0].point);
+                    _isHitProp.Value= true;
                 }
             })
             .AddTo(this.gameObject);
@@ -50,10 +58,16 @@ public class FoamBulletCore : MonoBehaviour
         _velocity = velocity;
         _isInitialized.Value = true;
         _isInitialized.AddTo(this.gameObject);
-        
-        return this.gameObject
-            .OnBecameInvisibleAsObservable()
+
+        return Observable.Merge(
+                this.gameObject.OnBecameInvisibleAsObservable(),
+                _isHitProp.Where(isHit=>isHit==true).AsUnitObservable()
+                )
             .FirstOrDefault()
-            .Do(_ => _isInitialized.Value = false);
-   }
+            .Do(_ =>
+            {
+                _isInitialized.Value = false;
+                _isHitProp.Value= false;
+            });
+    }
 }

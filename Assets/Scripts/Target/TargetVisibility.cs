@@ -7,7 +7,8 @@ public class TargetVisibility : MonoBehaviour
   
     void Start()
     {
-        _core.IsHit 
+        _core
+            .HitPosProp 
             .SkipLatestValueOnSubscribe()
             .Select(_=>false)
             .Subscribe(this.gameObject.SetActive)

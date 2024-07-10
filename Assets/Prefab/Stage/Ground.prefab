@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 224177041436682616}
   - component: {fileID: 6064400680688813308}
   - component: {fileID: 1975856791644863253}
-  - component: {fileID: 3307942713805867873}
-  - component: {fileID: 7710936271431892502}
-  - component: {fileID: 79247259673250030}
+  - component: {fileID: 3740035536863912726}
+  - component: {fileID: 4464993619024065333}
+  - component: {fileID: 3713826680863455236}
   - component: {fileID: 826167665027799880}
   m_Layer: 0
   m_Name: Ground
@@ -31,9 +31,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2283513326662381056}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f3a2f7d9447858c498eea50c061a82d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +110,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &3307942713805867873
+--- !u!114 &3740035536863912726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2283513326662381056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03fe884bd0372d34aa2d40b5ae260f5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 66dc9df1925dfa949aa2f52fbd88a5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7710936271431892502
+--- !u!114 &4464993619024065333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ffe31bfb8c40f409bf9fff4fb91452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _core: {fileID: 3307942713805867873}
---- !u!114 &79247259673250030
+  _core: {fileID: 3740035536863912726}
+--- !u!114 &3713826680863455236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,10 +144,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2283513326662381056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a6b16e1c531626499acb091c3aa433c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b96f85bd5deab842a33b267cd7bc6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _core: {fileID: 3307942713805867873}
+  _core: {fileID: 3740035536863912726}
 --- !u!114 &826167665027799880
 MonoBehaviour:
   m_ObjectHideFlags: 0

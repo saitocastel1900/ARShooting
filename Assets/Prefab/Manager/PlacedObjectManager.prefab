@@ -61,5 +61,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placedObject:
   - {fileID: 5960877848029640180, guid: 1526f98924f8dfb42aacdfb66bd0cb51, type: 3}
-  _referenceImageLibrary: {fileID: 11400000, guid: c82f3bb889fc226409064ba2a8cae0c5,
+  _referenceImageLibrary: {fileID: 11400000, guid: 0441eaba5e6b4ae4a9b7a30d7fd5a2ac,
     type: 2}

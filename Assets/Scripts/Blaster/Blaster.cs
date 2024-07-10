@@ -26,10 +26,11 @@ public class Blaster : MonoBehaviour
     
     private void Start()
     {
-        _inputEventProvider.InputTapPosition
+        _inputEventProvider.IsShotButtonPush
             .SkipLatestValueOnSubscribe()
-            .Subscribe(screenPosition =>
+            .Subscribe(_ =>
             {
+                Vector3 screenPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
                 _bullet.GenerateBullet(Camera.main.ScreenToWorldPoint(screenPosition),
                     Camera.main.ScreenPointToRay(screenPosition).direction, _shotPower);
                 
