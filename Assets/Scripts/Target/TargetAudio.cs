@@ -9,7 +9,8 @@ public class TargetAudio : MonoBehaviour
 
     private void Start()
     {
-        _core.IsHit
+        _core
+            .HitPosProp
             .SkipLatestValueOnSubscribe()
             .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.Hit1))
             .AddTo(this);
