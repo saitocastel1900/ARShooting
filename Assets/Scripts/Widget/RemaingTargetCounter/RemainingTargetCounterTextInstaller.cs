@@ -4,7 +4,7 @@ using Zenject;
 public class RemainingTargetCounterTextInstaller : MonoInstaller
 {
     [SerializeField] private int _remainingTargetCount = 10;
-    [SerializeField] private RemainingTargetCounterTextPresenter _remainingTargetCounterTextPresenter = null;
+    [SerializeField] private RemainingTargetCounterTextView _remainingTargetCounterTextView;
     
     public override void InstallBindings()
     {
@@ -12,5 +12,6 @@ public class RemainingTargetCounterTextInstaller : MonoInstaller
             .To<RemainingTargetCounterTextPresenter>().AsCached().NonLazy();
         Container.Bind<IRemainingTargetCounterTextModel>().To<RemainingTargetCounterTextModel>()
             .AsCached().WithArguments(_remainingTargetCount);
+        Container.Bind<RemainingTargetCounterTextView>().FromInstance(_remainingTargetCounterTextView);
     }
 }

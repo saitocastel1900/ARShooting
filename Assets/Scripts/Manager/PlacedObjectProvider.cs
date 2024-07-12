@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARSubsystems;
+using Zenject;
 
 public class PlacedObjectProvider : MonoBehaviour
 {

@@ -1,6 +1,5 @@
 using UniRx;
 using UnityEngine;
-using Zenject;
 
 public class TargetCore : MonoBehaviour, IHitable
 {
@@ -10,7 +9,8 @@ public class TargetCore : MonoBehaviour, IHitable
     public IReactiveProperty<Vector3> HitPosProp => _hitPosProp;
     private Vector3ReactiveProperty _hitPosProp = new Vector3ReactiveProperty(Vector3.zero);
 
-    [Inject] private RemainingTargetCounterTextPresenter _remainingTargetCounter;
+    [SerializeField]
+    private RemainingTargetCounterTextPresenter _remainingTargetCounter;
 
     private void Start()
     {
