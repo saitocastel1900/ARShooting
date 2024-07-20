@@ -55,17 +55,17 @@ PrefabInstance:
     - target: {fileID: 5367457300784850627, guid: 2c632dacd6a4ded419c55c0e3225ae05,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5367457300784850627, guid: 2c632dacd6a4ded419c55c0e3225ae05,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5367457300784850627, guid: 2c632dacd6a4ded419c55c0e3225ae05,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5367457300784850627, guid: 2c632dacd6a4ded419c55c0e3225ae05,
         type: 3}
@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 5367457300784850627, guid: 2c632dacd6a4ded419c55c0e3225ae05,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 5367457300784850627, guid: 2c632dacd6a4ded419c55c0e3225ae05,
         type: 3}
@@ -144,17 +144,17 @@ PrefabInstance:
     - target: {fileID: 510499717207885053, guid: fe4d9a158a0acca4dbce3aa6030a1bac,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 510499717207885053, guid: fe4d9a158a0acca4dbce3aa6030a1bac,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 510499717207885053, guid: fe4d9a158a0acca4dbce3aa6030a1bac,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 510499717207885053, guid: fe4d9a158a0acca4dbce3aa6030a1bac,
         type: 3}
@@ -211,6 +211,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 6064400680688813308, guid: fe4d9a158a0acca4dbce3aa6030a1bac,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f3a2f7d9447858c498eea50c061a82d0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -234,6 +239,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375243061255082472, guid: 16698b90443b007479c1a09d5bdbe337,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375243061255082472, guid: 16698b90443b007479c1a09d5bdbe337,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6034555376796567258, guid: 16698b90443b007479c1a09d5bdbe337,
         type: 3}
@@ -268,12 +283,12 @@ PrefabInstance:
     - target: {fileID: 6034555376796567258, guid: 16698b90443b007479c1a09d5bdbe337,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.4167
+      value: 0.9285
       objectReference: {fileID: 0}
     - target: {fileID: 6034555376796567258, guid: 16698b90443b007479c1a09d5bdbe337,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.1298
+      value: 0.2892
       objectReference: {fileID: 0}
     - target: {fileID: 6034555376796567258, guid: 16698b90443b007479c1a09d5bdbe337,
         type: 3}
@@ -318,7 +333,7 @@ PrefabInstance:
     - target: {fileID: 6034555376796567258, guid: 16698b90443b007479c1a09d5bdbe337,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.274
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6034555376796567258, guid: 16698b90443b007479c1a09d5bdbe337,
         type: 3}
