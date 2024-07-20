@@ -1,9 +1,13 @@
-using System;
 using UniRx;
-using Zenject;
+using UnityEngine;
 
-public class RemainingTargetCounterTextPresenter : IDisposable, IInitializable
+public class RemainingTargetCounterTextPresenter : MonoBehaviour
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField] private int _remainingTargetCount = 10;
+    
     /// <summary>
     /// Model
     /// </summary>
@@ -12,20 +16,13 @@ public class RemainingTargetCounterTextPresenter : IDisposable, IInitializable
     /// <summary>
     /// View
     /// </summary>
-    private RemainingTargetCounterTextView _view;
+    [SerializeField] private RemainingTargetCounterTextView _view;
 
-    /// <summary>
-    /// Disposable
-    /// </summary>
-    private CompositeDisposable _compositeDisposable;
-
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    public RemainingTargetCounterTextPresenter(IRemainingTargetCounterTextModel model, RemainingTargetCounterTextView view)
+    
+    //ここは改善する必要がある
+    private void Start()
     {
-        _model = model;
-        _view = view;
+        Initialize();
     }
 
     /// <summary>
@@ -33,7 +30,7 @@ public class RemainingTargetCounterTextPresenter : IDisposable, IInitializable
     /// </summary>
     public void Initialize()
     {
-        _compositeDisposable = new CompositeDisposable();
+        _model = new RemainingTargetCounterTextModel(_remainingTargetCount);
         _view.Initialize();
         
         Bind();
@@ -46,7 +43,7 @@ public class RemainingTargetCounterTextPresenter : IDisposable, IInitializable
     {
         _model.RemainingTargetCountProp
             .Subscribe(_view.SetText)
-            .AddTo(_compositeDisposable);
+            .AddTo(this.gameObject);
     }
     
     /// <summary>
@@ -55,13 +52,5 @@ public class RemainingTargetCounterTextPresenter : IDisposable, IInitializable
     public void Decrement()
     {
         _model.Decrement();
-    }
-    
-    /// <summary>
-    /// Dispose
-    /// </summary>
-    public void Dispose()
-    {
-        _compositeDisposable.Dispose();
     }
 }

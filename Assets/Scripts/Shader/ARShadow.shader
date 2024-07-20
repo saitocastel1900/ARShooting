@@ -1,4 +1,4 @@
-Shader "DrawShadow"
+Shader "Custom/ARShadow"
 {
     Properties
     {
@@ -80,8 +80,7 @@ Shader "DrawShadow"
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
  
                 half4 color = half4(1,1,1,1);
- 
-            #ifdef _MAIN_LIGHT_SHADOWS
+                
                 VertexPositionInputs vertexInput = (VertexPositionInputs)0;
                 vertexInput.positionWS = input.positionWS;
  
@@ -89,7 +88,6 @@ Shader "DrawShadow"
                 half shadowAttenutation = MainLightRealtimeShadow(shadowCoord);
                 color = lerp(half4(1,1,1,1), _ShadowColor, (1.0 - shadowAttenutation) * _ShadowColor.a);
                 color.rgb = MixFogColor(color.rgb, half3(1,1,1), input.fogCoord);
-            #endif
                 return color;
             }
  
