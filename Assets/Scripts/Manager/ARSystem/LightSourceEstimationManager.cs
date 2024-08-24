@@ -2,6 +2,9 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
+/// <summary>
+/// 光源推定を管理する
+/// </summary>
 public class LightSourceEstimationManager : MonoBehaviour
    {
       /// <summary>
@@ -15,23 +18,20 @@ public class LightSourceEstimationManager : MonoBehaviour
       [SerializeField] private Light _directionLight;
       
       /// <summary>
-      ///
+      /// 平均輝度
       /// </summary>
       private float? _averageBrightness;
 
       /// <summary>
-      /// 
+      /// 光温度
       /// </summary>
       private float? _averageColorTemperature;
       
       /// <summary>
-      /// 
+      /// 色調補正
       /// </summary>
       private Color? _colorCorrection;
-
-      /// <summary>
-      /// 
-      /// </summary>
+      
       private void Start()
       {
          Observable.FromEvent<ARCameraFrameEventArgs>(
@@ -41,8 +41,9 @@ public class LightSourceEstimationManager : MonoBehaviour
       }
 
       /// <summary>
-      /// 仮想カメラに光源推定で得た値を設定
+      /// 光源推定を行う
       /// </summary>
+      /// <param name="eventArgs">光に関する情報</param>
       private void SetVirtualLight(ARCameraFrameEventArgs eventArgs)
       {
          Color color = Color.white;

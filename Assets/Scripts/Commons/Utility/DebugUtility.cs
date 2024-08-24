@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Commons.Utility
 {
+    /// <summary>
+    /// DebugLogのUtility
+    /// </summary>
     public static class DebugUtility
     {
         /// <summary>

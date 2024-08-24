@@ -1,10 +1,13 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// 的の残存数の見た目を管理する
+/// </summary>
 public class RemainingTargetCounterTextView : MonoBehaviour
 {
     /// <summary>
-    /// Text
+    /// TextMeshProUGUI
     /// </summary>
     [SerializeField] private TextMeshProUGUI _text;
 
@@ -17,8 +20,9 @@ public class RemainingTargetCounterTextView : MonoBehaviour
     }
         
     /// <summary>
-    /// 
+    /// 残存数を設定する
     /// </summary>
+    /// <param name="remainingTargetCount">残存数</param>
     public void SetText(int remainingTargetCount)
     {
         _text.text = $"あと{remainingTargetCount}こ";

@@ -3,27 +3,34 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
+/// <summary>
+/// 設置するオブジェクトを管理する
+/// </summary>
 public class PlacedObjectManager : MonoBehaviour
 {
     /// <summary>
-    ///
+    ///MultiImageTrackingManager
     /// </summary>
     [SerializeField] private MultiImageTrackingManager _imageTrackingManager;
 
     /// <summary>
-    ///
+    ///PlacedObjectProvider
     /// </summary>
     [SerializeField] private PlacedObjectProvider _placedObjectProvider;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
+        //マーカーを読み取ったら、オブジェクトを配置する
         _imageTrackingManager
             .OnImageTracking
             .Subscribe(OnTrackedImagesChanged)
             .AddTo(this.gameObject);
     }
 
+    /// <summary>
+    /// マーカーを読み取った
+    /// </summary>
+    /// <param name="eventArgs">検出したマーカー</param>
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
         foreach (var trackedImage in eventArgs.added)
@@ -37,6 +44,10 @@ public class PlacedObjectManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// オブジェクトを表示する
+    /// </summary>
+    /// <param name="trackedImage">検出したマーカー</param>
     private void SetActiveObject(ARTrackedImage trackedImage)
     {
         var arObject = _placedObjectProvider.MakerNamePlacedObjectMap[trackedImage.referenceImage.name];

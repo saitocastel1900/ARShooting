@@ -1,11 +1,12 @@
 using UniRx;
-using UnityEngine;
 
+/// <summary>
+/// 入力を管理する
+/// </summary>
 public interface IInputEventProvider
 {
     /// <summary>
-    /// 
+    /// 発射ボタンが押されたか
     /// </summary>
-    /// <returns></returns>
     IReadOnlyReactiveProperty<bool> IsShotButtonPush { get; }
 }
