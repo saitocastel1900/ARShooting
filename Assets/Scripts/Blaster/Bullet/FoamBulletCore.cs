@@ -1,9 +1,11 @@
 using System;
-using Commons.Utility;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
+/// <summary>
+///弾のプロパティを管理する
+/// </summary>
 public class FoamBulletCore : MonoBehaviour
 {
     /// <summary>
@@ -13,25 +15,26 @@ public class FoamBulletCore : MonoBehaviour
     private readonly BoolReactiveProperty _isInitialized = new BoolReactiveProperty(false);
 
     /// <summary>
-    /// 
+    /// 的に当たったか
     /// </summary>
-    public IReactiveProperty<bool> IsHitProp => _isHitProp;
-    private BoolReactiveProperty _isHitProp = new BoolReactiveProperty(false);
+    public IReactiveProperty<bool> IsHit => _isHit;
+    private BoolReactiveProperty _isHit = new BoolReactiveProperty(false);
 
     /// <summary>
-    /// 
+    /// 進行方向
     /// </summary>
     public Vector3 Direction => _direction;
     private Vector3 _direction;
 
     /// <summary>
-    /// 
+    /// 速度
     /// </summary>
     public float Velocity => _velocity;
     private float _velocity;
 
     private void Start()
     {
+        //的に当たったら、フラグを立てて相手のHit()を呼び出す
         this.gameObject
             .OnCollisionEnterAsObservable()
             .Subscribe(hit =>
@@ -40,18 +43,18 @@ public class FoamBulletCore : MonoBehaviour
                 if (hitable != null)
                 {
                     hitable.Hit(hit.contacts[0].point);
-                    _isHitProp.Value= true;
+                    _isHit.Value= true;
                 }
             })
             .AddTo(this.gameObject);
     }
 
     /// <summary>
-    /// 
+    /// 初期化
     /// </summary>
-    /// <param name="direction"></param>
-    /// <param name="velocity"></param>
-    /// <returns></returns>
+    /// <param name="direction">進行方向</param>
+    /// <param name="velocity">速度</param>
+    /// <returns>弾が非表示になった or 的にあった時のストリーム</returns>
     public IObservable<Unit> InitializeFoamBullet(Vector3 direction, float velocity)
     {
         _direction = direction;
@@ -59,15 +62,16 @@ public class FoamBulletCore : MonoBehaviour
         _isInitialized.Value = true;
         _isInitialized.AddTo(this.gameObject);
 
+        //弾が非表示になった or 的にあった時、プールに返す
         return Observable.Merge(
                 this.gameObject.OnBecameInvisibleAsObservable(),
-                _isHitProp.Where(isHit=>isHit==true).AsUnitObservable()
+                _isHit.Where(isHit=>isHit==true).AsUnitObservable()
                 )
             .FirstOrDefault()
             .Do(_ =>
             {
                 _isInitialized.Value = false;
-                _isHitProp.Value= false;
+                _isHit.Value= false;
             });
     }
 }

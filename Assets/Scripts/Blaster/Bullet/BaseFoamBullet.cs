@@ -1,10 +1,13 @@
 using UniRx;
 using UnityEngine;
 
+/// <summary>
+/// 弾の基底
+/// </summary>
 public abstract class BaseFoamBullet : MonoBehaviour
 {
     /// <summary>
-    /// MoleCore
+    /// 弾
     /// </summary>
     protected FoamBulletCore _foamBulletCore;
 

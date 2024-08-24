@@ -1,27 +1,32 @@
 using UniRx;
 using UnityEngine;
 
-public class TargetEffect : MonoBehaviour, IHitable
-{
+/// <summary>
+/// 的のエフェクトを管理する
+/// </summary>
+public class TargetEffect : MonoBehaviour
+{ 
+    /// <summary>
+    /// 的
+    /// </summary>
     [SerializeField] private TargetCore _core;
+   
+    /// <summary>
+    /// エフェクト
+    /// </summary>
     [SerializeField] private ParticleSystem _particle;
-    
-    public void Hit(Vector3 position)
-    {
-        var effect = Instantiate(_particle, position, Quaternion.identity);
-        effect.Play();
-    }
 
-    private void Start()
-    {
-        _core
-            .HitPosProp
-            .SkipLatestValueOnSubscribe()
-            .Subscribe(position =>
-            {
-                var effect = Instantiate(_particle, position, Quaternion.identity);
-                effect.Play();
-            })
-            .AddTo(this);
-    }
+   private void Start()
+   {
+       //的に弾が当たったら、エフェクトを再生する
+       _core
+           .OnHit
+           .SkipLatestValueOnSubscribe()
+           .Subscribe(position =>
+           {
+               var effect = Instantiate(_particle, position, Quaternion.identity);
+               effect.Play();
+           })
+           .AddTo(this);
+   }
 }
