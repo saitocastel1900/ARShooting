@@ -37,8 +37,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _RectSize: 0.378
     - __dirty: 1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RectSize: {r: 2.12, g: 0.5, b: 0, a: 0}
+    - _ShadowColor: {r: 0.3660378, g: 0.3660378, b: 0.3660378, a: 1}
   m_BuildTextureStacks: []
