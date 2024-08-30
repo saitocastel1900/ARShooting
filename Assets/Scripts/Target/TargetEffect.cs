@@ -14,7 +14,7 @@ public class TargetEffect : MonoBehaviour
     /// <summary>
     /// エフェクト
     /// </summary>
-    [SerializeField] private ParticleSystem _particle;
+    [SerializeField] private BrokeTargetEffect _effectPrefab;
 
    private void Start()
    {
@@ -24,8 +24,8 @@ public class TargetEffect : MonoBehaviour
            .SkipLatestValueOnSubscribe()
            .Subscribe(position =>
            {
-               var effect = Instantiate(_particle, position, Quaternion.identity);
-               effect.Play();
+               var effect = Instantiate(_effectPrefab, transform.position, Quaternion.identity);
+               effect.PlayEffect();
            })
            .AddTo(this);
    }
