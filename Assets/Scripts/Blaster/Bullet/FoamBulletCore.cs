@@ -36,13 +36,13 @@ public class FoamBulletCore : MonoBehaviour
     {
         //的に当たったら、フラグを立てて相手のHit()を呼び出す
         this.gameObject
-            .OnCollisionEnterAsObservable()
+            .OnTriggerEnterAsObservable()
             .Subscribe(hit =>
             {
                 var hitable = hit.gameObject.GetComponent<IHitable>();
                 if (hitable != null)
                 {
-                    hitable.Hit(hit.contacts[0].point);
+                    hitable.Hit(hit.ClosestPointOnBounds(this.transform.position));
                     _isHit.Value= true;
                 }
             })
