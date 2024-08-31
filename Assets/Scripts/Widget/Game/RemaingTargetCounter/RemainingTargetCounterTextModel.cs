@@ -22,8 +22,8 @@ public class RemainingTargetCounterTextModel : IRemainingTargetCounterTextModel
     /// <summary>
     /// 的の残存を減らす
     /// </summary>
-    public void Decrement()
+    public void SetRemainingTargetCount(int currentRemainingTargetCount)
     {
-        _remainingTargetCountProp.Value--;
+        _remainingTargetCountProp.Value = currentRemainingTargetCount;
     }
 }

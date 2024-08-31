@@ -13,5 +13,5 @@ public interface IRemainingTargetCounterTextModel
     /// <summary>
     /// 的の残存を減らす
     /// </summary>
-    public void Decrement();
+    public void SetRemainingTargetCount(int currentRemainingTargetCount);
 }
