@@ -14,7 +14,7 @@ public static class GameEnum
         /// 初期化
         /// </summary>
         Initializing,
-        
+      
         /// <summary>
         /// ゲームプレイ
         /// </summary>
