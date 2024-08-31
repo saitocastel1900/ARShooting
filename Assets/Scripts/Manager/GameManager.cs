@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -24,15 +25,28 @@ public class GameManager : MonoBehaviour
     /// ResultManager
     /// </summary>
     [SerializeField] private ResultManager _resultManager;
+
+    [SerializeField] private MultiImageTrackingManager _imageTrackingManager;
+    
+    [SerializeField] private TitleWidgetController _titleWidget;
     
     /// <summary>
     /// TargetProvider
     /// </summary>
     [Inject] private TargetProvider _targetProvider;
     
+    [Inject] private StageManager _stageManager;
+    
     private void Start()
     {
-        _currentState.Value = GameEnum.State.Play;
+        _titleWidget.
+            OnClickGameStartButton
+            .Subscribe(_=> _currentState.Value = GameEnum.State.Initializing)
+            .AddTo(this.gameObject);
+
+        _targetProvider
+            .Targets
+            .ObserveCountChanged().Subscribe(x => Debug.Log(x));
         
         _currentState
             .DistinctUntilChanged()
@@ -46,6 +60,11 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator InitializeCoroutine()
     {
+        _imageTrackingManager
+            .OnImageTracking
+            .Where(_=>_stageManager.Stages.Count > 0)
+            .Subscribe(_=>_currentState.Value = GameEnum.State.Play);
+        
         yield return null;
     }
     
@@ -54,17 +73,27 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Play()
     {
-        _timerManager.StartTimer();
+        _stageManager.ShowStage();
         
-        //的の数が0になったらリザルトを表示する
+        _timerManager.StartCountTime();
+        
         _targetProvider
             .Targets
             .ObserveCountChanged()
-            .Where(x=>x==0)
+            .Where(x => x == 0)
             .Subscribe(_=>
             {
-                _timerManager.StopTimer();
-                _currentState.Value = GameEnum.State.Result;
+                if (_stageManager.IsLastStage)
+                {
+                    //ステージをすべてクリアできたらリザルト
+                    _timerManager.StopTimer();
+                    _currentState.Value = GameEnum.State.Result;
+                }
+                else
+                {
+                    //的の数が0になったら次のステージに移動
+                    _stageManager.NextStage();
+                }
             });
     }
 
