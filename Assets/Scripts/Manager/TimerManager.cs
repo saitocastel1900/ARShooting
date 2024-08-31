@@ -21,7 +21,7 @@ public class TimerManager : MonoBehaviour
     /// <summary>
     /// 時間を数え始める
     /// </summary>
-    public void StartTimer()
+    public void StartCountTime()
     {
         _disposable = Observable
             .Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1))
