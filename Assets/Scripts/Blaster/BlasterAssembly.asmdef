@@ -1,0 +1,19 @@
+{
+    "name": "BlasterAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:be6ea0d365b34e8449f9eded1822e767",
+        "GUID:276e66da487f58043a695885c88d5d8b",
+        "GUID:e26ed4248a77e5e4793fff58911305e4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
