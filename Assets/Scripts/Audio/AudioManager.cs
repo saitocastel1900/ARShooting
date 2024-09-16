@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     /// <summary>
     /// SEを流す
     /// </summary>
-    /// <param name="soundEffect"></param>
+    /// <param name="soundEffect">流したいSE</param>
     public void PlaySoundEffect(SoundEffect soundEffect)
     {
         _component.PlaySoundEffect(soundEffect);

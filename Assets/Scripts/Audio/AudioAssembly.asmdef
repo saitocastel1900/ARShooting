@@ -1,0 +1,19 @@
+{
+    "name": "AudioAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:800597811bcc5d848b15e12807d6de45",
+        "GUID:72dff67bf7176f548b8e49934221a64a",
+        "GUID:2d4f49868dbd34f4899dc1357caa1d2a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

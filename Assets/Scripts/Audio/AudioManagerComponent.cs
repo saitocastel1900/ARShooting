@@ -30,7 +30,7 @@ public class AudioManagerComponent : MonoBehaviour
     {
         criAtomSource.loop = isLoop;
         criAtomSource.playOnStart = false;
-
+        
         return criAtomSource;
     }
 

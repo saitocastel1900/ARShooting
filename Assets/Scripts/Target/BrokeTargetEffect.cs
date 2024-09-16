@@ -1,22 +1,41 @@
-using System;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
+/// <summary>
+/// 的が壊れるエフェクトを管理する
+/// </summary>
 public class BrokeTargetEffect : MonoBehaviour
 {
+    /// <summary>
+    /// Transform
+    /// </summary>
    [SerializeField] private Transform _brokeEffect;
+    
+    /// <summary>
+    /// 吹っ飛ぶ強さ
+    /// </summary>
    [SerializeField] private Vector2 _forceRange = new Vector2(-1f, 1f);
-   [SerializeField] private float _reductionDuration;
+   
+    /// <summary>
+    /// 破片が小さくなっていく時間
+    /// </summary>
+    [SerializeField] private float _reductionDuration;
 
+    /// <summary>
+    /// エフェクトを再生する
+    /// </summary>
    public void PlayEffect()
     {
+        //破片を小さくする
         var childTransforms = 
             _brokeEffect.GetComponentsInChildren<Transform>().ToList();
         childTransforms.ForEach(t => t.DOScale(Vector3.zero, _reductionDuration));
         
         var childRigidbodies = 
             _brokeEffect.GetComponentsInChildren<Rigidbody>().ToList();
+        
+        //破片を吹っ飛ばす
         childRigidbodies.ForEach(rb =>
         {
             rb.isKinematic = false;
