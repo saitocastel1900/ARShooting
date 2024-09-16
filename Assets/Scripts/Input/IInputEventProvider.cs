@@ -9,4 +9,9 @@ public interface IInputEventProvider
     /// 発射ボタンが押されたか
     /// </summary>
     IReadOnlyReactiveProperty<bool> IsShotButtonPush { get; }
+    
+    /// <summary>
+    /// ゲームを開始させるボタンが押されたか
+    /// </summary>
+    IReadOnlyReactiveProperty<bool> IsGameStartPanelButtonPush { get; }
 }

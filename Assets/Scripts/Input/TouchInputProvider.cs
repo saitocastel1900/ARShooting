@@ -15,9 +15,20 @@ public class TouchInputProvider : IInputEventProvider,IInitializable,IDisposable
     private BoolReactiveProperty _isShotButtonPush = new BoolReactiveProperty(false);
     
     /// <summary>
+    /// ゲームを開始させるボタンが押されたか
+    /// </summary>
+    public IReadOnlyReactiveProperty<bool> IsGameStartPanelButtonPush => _isGameStartPanelButtonPush;
+    private BoolReactiveProperty _isGameStartPanelButtonPush = new BoolReactiveProperty(false);
+    
+    /// <summary>
     /// 発射ボタン
     /// </summary>
     private Button _shotButton;
+    
+    /// <summary>
+    /// ゲームを開始させるボタン
+    /// </summary>
+    private Button _gameStartPanelButton;
     
     /// <summary>
     /// CompositeDisposable
@@ -28,9 +39,10 @@ public class TouchInputProvider : IInputEventProvider,IInitializable,IDisposable
     /// コンストラクタ
     /// </summary>
     /// <param name="shotButton">発射ボタン</param>
-    public TouchInputProvider(Button shotButton)
+    public TouchInputProvider(Button shotButton, Button gameStartPanelButton)
     {
         _shotButton = shotButton;
+        _gameStartPanelButton = gameStartPanelButton;
     }   
     
     /// <summary>
@@ -43,6 +55,13 @@ public class TouchInputProvider : IInputEventProvider,IInitializable,IDisposable
             .OnClickAsObservable()
             .Select(_ =>true)
             .Subscribe(_isShotButtonPush.SetValueAndForceNotify)
+            .AddTo(_compositeDisposable);
+        
+        //発射ボタンの入力に応じて、フラグを立てる
+        _gameStartPanelButton
+            .OnClickAsObservable()
+            .Select(_ =>true)
+            .Subscribe(_isGameStartPanelButtonPush.SetValueAndForceNotify)
             .AddTo(_compositeDisposable);
     }
 

@@ -22,7 +22,7 @@ public class ClearTimeView : MonoBehaviour
     /// <summary>
     /// スコアを設定する
     /// </summary>
-    /// <param name="time">スコア</param>
+    /// <param name="time">時間</param>
     public void SetText(int time)
     {
         _scoreText.text = time.ToString();
