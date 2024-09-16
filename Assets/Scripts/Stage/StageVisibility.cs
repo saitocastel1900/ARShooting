@@ -1,20 +1,26 @@
 using UniRx;
 using UnityEngine;
 
+/// <summary>
+/// ステージの表示・非表示を管理する
+/// </summary>
 public class StageVisibility : MonoBehaviour
 {
+    /// <summary>
+    /// ステージ
+    /// </summary>
     [SerializeField] private StageCore _core;
-    [SerializeField] private GameObject _stage;
 
+    /// <summary>
+    /// ステージのオブジェクト
+    /// </summary>
+    [SerializeField] private GameObject _stageObject;
+    
     private void Start()
     {
         _core
             .IsView
-            .Subscribe(x=>
-            {
-                _stage.SetActive(x);
-                Debug.Log(x+"こんにちわ");
-            })
+            .Subscribe(_stageObject.SetActive)
             .AddTo(this.gameObject);
     }
 }
