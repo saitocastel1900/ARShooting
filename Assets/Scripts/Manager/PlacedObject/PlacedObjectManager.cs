@@ -50,6 +50,7 @@ public class PlacedObjectManager : MonoBehaviour
     /// <param name="trackedImage">検出したマーカー</param>
     private void SetActiveObject(ARTrackedImage trackedImage)
     {
+        //マーカーに応じたオブジェクトを取得
         var arObject = _placedObjectProvider.MakerNamePlacedObjectMap[trackedImage.referenceImage.name];
         var imageMarkerTransform = trackedImage.transform;
         
@@ -57,6 +58,7 @@ public class PlacedObjectManager : MonoBehaviour
         arObject.transform.SetPositionAndRotation(imageMarkerTransform.transform.position, markerFrontRotation);
         arObject.transform.SetParent(imageMarkerTransform);
         
+        //マーカーが検出されたら、オブジェクトを表示する
         arObject.SetActive(trackedImage.trackingState == TrackingState.Tracking);
     }
 }

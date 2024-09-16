@@ -25,7 +25,7 @@ public class PlacedObjectProvider : MonoBehaviour
     
     private void Start()
     {
-        //
+        // マーカーのペアとなるオブジェクトを生成する
         for (var i = 0; i < _placedObject.Length; i++)
         {
             var placeObject = Instantiate(_placedObject[i]);
