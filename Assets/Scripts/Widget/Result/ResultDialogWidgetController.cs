@@ -1,3 +1,4 @@
+using System;
 using UniRx;
 using UnityEngine;
 
@@ -9,11 +10,11 @@ public class ResultDialogWidgetController : MonoBehaviour
    /// <summary>
    /// ダイアログを表示するか
    /// </summary>
-   public IReactiveProperty<bool> IsShowResultDialog => _isShowResultDialog;
-   private BoolReactiveProperty _isShowResultDialog = new BoolReactiveProperty(false);
-
+   public IObservable<Unit> OnShowDialogWidgetAsObservable => _dialogWidgetSubject;
+   private Subject<Unit> _dialogWidgetSubject = new Subject<Unit>();
+   
    /// <summary>
    /// リザルト表示を開始する
    /// </summary>
-   public void StartResult() => _isShowResultDialog.Value = true;
+   public void StartResult() => _dialogWidgetSubject.OnNext(Unit.Default);
 }
