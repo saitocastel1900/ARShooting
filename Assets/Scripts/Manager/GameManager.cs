@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Linq;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -15,38 +13,55 @@ public class GameManager : MonoBehaviour
     public IReactiveProperty<GameEnum.State> CurrentStateProp => _currentState;
     private ReactiveProperty<GameEnum.State> _currentState = new ReactiveProperty<GameEnum.State>
         (GameEnum.State.None);
-    
+
     /// <summary>
     /// TimerManager
     /// </summary>
     [SerializeField] private TimerManager _timerManager;
-    
-    /// <summary>
-    /// ResultManager
-    /// </summary>
-    [SerializeField] private ResultManager _resultManager;
 
+    /// <summary>
+    /// MultiImageTrackingManager
+    /// </summary>
     [SerializeField] private MultiImageTrackingManager _imageTrackingManager;
     
-    [SerializeField] private TitleWidgetController _titleWidget;
+    /// <summary>
+    /// ReadMakerGuideWidgetController
+    /// </summary>
+    [SerializeField] private ReadMakerGuideWidgetController _readMakerGuideWidgetController;
+    
+    /// <summary>
+    /// HUDWidgetController
+    /// </summary>
+    [SerializeField] private HUDWidgetController _hudWidgetController;
+    
+    /// <summary>
+    /// ResultDialogWidgetControllr
+    /// </summary>
+    [SerializeField] private ResultDialogWidgetController _resultManager;
     
     /// <summary>
     /// TargetProvider
     /// </summary>
     [Inject] private TargetProvider _targetProvider;
     
+    /// <summary>
+    /// StageManager
+    /// </summary>
     [Inject] private StageManager _stageManager;
+    
+    /// <summary>
+    /// IInputEventProvider
+    /// </summary>
+    [Inject] private IInputEventProvider _input;
     
     private void Start()
     {
-        _titleWidget.
-            OnClickGameStartButton
-            .Subscribe(_=> _currentState.Value = GameEnum.State.Initializing)
+        //画面がタップされたら、ゲームをはじめる
+        _input
+            .IsGameStartPanelButtonPush
+            .SkipLatestValueOnSubscribe()
+            .Subscribe(_=> _currentState.Value = GameEnum.State.Ready)
             .AddTo(this.gameObject);
-
-        _targetProvider
-            .Targets
-            .ObserveCountChanged().Subscribe(x => Debug.Log(x));
         
         _currentState
             .DistinctUntilChanged()
@@ -55,17 +70,23 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 初期化
+    /// 準備中
     /// </summary>
-    /// <returns></returns>
-    private IEnumerator InitializeCoroutine()
+    private void Ready()
     {
+        _readMakerGuideWidgetController
+            .StartMakerGuide();
+        
+        //マーカーを読み取れたら、ゲームを開始する
         _imageTrackingManager
             .OnImageTracking
             .Where(_=>_stageManager.Stages.Count > 0)
-            .Subscribe(_=>_currentState.Value = GameEnum.State.Play);
+            .FirstOrDefault()
+            .Subscribe(_=> _readMakerGuideWidgetController.FinishMakerGuide()); 
         
-        yield return null;
+        _readMakerGuideWidgetController
+            .OnFinishMakerGuide
+            .Subscribe(_=>_currentState.Value = GameEnum.State.Play);
     }
     
     /// <summary>
@@ -74,6 +95,8 @@ public class GameManager : MonoBehaviour
     private void Play()
     {
         _stageManager.ShowStage();
+        
+        _hudWidgetController.StartGoalGuide();
         
         _timerManager.StartCountTime();
         
@@ -91,7 +114,8 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    //的の数が0になったら次のステージに移動
+                    //まだクリアしていなかったステージがあったら、次のステージへ
+                    _hudWidgetController.UpdateGamePlayStatus(GamePlayStatus.Continue);
                     _stageManager.NextStage();
                 }
             });
@@ -102,6 +126,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Result()
     {
+        _hudWidgetController.UpdateGamePlayStatus(GamePlayStatus.Congratulation);
         _resultManager.StartResult();  
     }
 
@@ -111,10 +136,12 @@ public class GameManager : MonoBehaviour
     /// <param name="currentState">現在の状態</param>
     private void OnStateChanged(GameEnum.State currentState)
     {
+        Debug.Log(currentState);
+        
         switch (currentState)
         {
-            case GameEnum.State.Initializing:
-                StartCoroutine(InitializeCoroutine());
+            case GameEnum.State.Ready:
+                Ready();
                 break;
             case GameEnum.State.Play:
                 Play();
