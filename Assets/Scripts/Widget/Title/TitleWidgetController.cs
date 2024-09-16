@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UniRx;
 using Zenject;
@@ -9,45 +8,22 @@ using Zenject;
 public class TitleWidgetController : MonoBehaviour
 {
     /// <summary>
-    /// クリックされたときに呼ばれる
-    /// </summary>
-    public IObservable<Unit> OnClickGameStartButton => _gameStartButton.OnClickAsObservable;
-    
-    /// <summary>
     /// Canvas
     /// </summary>
-    [SerializeField] private Canvas _titleWidget;
+    [SerializeField] private Canvas _canvas;
     
     /// <summary>
-    /// GameStartButtonWidget
+    /// IInputEventProvider
     /// </summary>
-    [SerializeField] private GameStartButtonWidget _gameStartButton;
+    [Inject] private IInputEventProvider _input;
     
     private void Start()
     {
-        //ゲームスタートボタンがクリックされたら、音を流す
-        _gameStartButton
-            .OnClickAsObservable
-            .Subscribe(_=>
-            {
-                Hide();
-            })
+        //ゲームスタートボタンがクリックされたら、非表示にする
+        _input
+            .IsGameStartPanelButtonPush
+            .SkipLatestValueOnSubscribe()
+            .Subscribe(_=>_canvas.enabled = false)
             .AddTo(this.gameObject);
-    }
-    
-    /// <summary>
-    /// 表示
-    /// </summary>
-    public void Show()
-    {
-        _titleWidget.enabled = true;
-    }
-
-    /// <summary>
-    /// 非表示
-    /// </summary>
-    public void Hide()
-    {
-        _titleWidget.enabled = false;
     }
 }
