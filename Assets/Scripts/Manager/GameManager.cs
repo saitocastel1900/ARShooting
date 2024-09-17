@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HUDWidgetController _hudWidgetController;
     
     /// <summary>
-    /// ResultDialogWidgetControllr
+    /// ResultDialogWidgetController
     /// </summary>
     [SerializeField] private ResultDialogWidgetController _resultManager;
     
@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour
     [Inject] private StageManager _stageManager;
     
     /// <summary>
+    /// AudioManager
+    /// </summary>
+    [Inject] private AudioManager _audioManager;
+    
+    /// <summary>
     /// IInputEventProvider
     /// </summary>
     [Inject] private IInputEventProvider _input;
@@ -60,13 +65,19 @@ public class GameManager : MonoBehaviour
         _input
             .IsGameStartPanelButtonPush
             .SkipLatestValueOnSubscribe()
-            .Subscribe(_=> _currentState.Value = GameEnum.State.Ready)
+            .Subscribe(_=>
+            {
+                _audioManager.PlaySoundEffect(SoundEffect.GameStartButton);
+                _currentState.Value = GameEnum.State.Ready;
+            })
             .AddTo(this.gameObject);
         
         _currentState
             .DistinctUntilChanged()
             .Subscribe(OnStateChanged)
             .AddTo(this.gameObject);
+    
+        _audioManager.PlayBGM(BGM.BGM2, true);
     }
 
     /// <summary>
@@ -74,15 +85,21 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Ready()
     {
-        _readMakerGuideWidgetController
-            .StartMakerGuide();
+        _readMakerGuideWidgetController.StartMakerGuide();
+        
+        _audioManager.PlaySoundEffect(SoundEffect.Guide4);
         
         //マーカーを読み取れたら、ゲームを開始する
         _imageTrackingManager
             .OnImageTracking
             .Where(_=>_stageManager.Stages.Count > 0)
             .FirstOrDefault()
-            .Subscribe(_=> _readMakerGuideWidgetController.FinishMakerGuide()); 
+            .Subscribe(_=>
+            {
+                _readMakerGuideWidgetController.FinishMakerGuide();
+                _audioManager.StopBGM();
+                _audioManager.PlaySoundEffect(SoundEffect.MakerLoaded);
+            }); 
         
         _readMakerGuideWidgetController
             .OnFinishMakerGuide
@@ -94,11 +111,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Play()
     {
+        _audioManager.PlayBGM(BGM.BGM1,true);
+        
         _stageManager.ShowStage();
         
         _hudWidgetController.StartGoalGuide();
         
         _timerManager.StartCountTime();
+        
+        _audioManager.PlaySoundEffect(SoundEffect.GameStart);
         
         _targetProvider
             .Targets
@@ -117,6 +138,7 @@ public class GameManager : MonoBehaviour
                     //まだクリアしていなかったステージがあったら、次のステージへ
                     _hudWidgetController.UpdateGamePlayStatus(GamePlayStatus.Continue);
                     _stageManager.NextStage();
+                    _audioManager.PlaySoundEffect(SoundEffect.StageClear);
                 }
             });
     }
@@ -128,6 +150,7 @@ public class GameManager : MonoBehaviour
     {
         _hudWidgetController.UpdateGamePlayStatus(GamePlayStatus.Congratulation);
         _resultManager.StartResult();  
+        _audioManager.PlaySoundEffect(SoundEffect.GameClear);
     }
 
     /// <summary>
@@ -136,8 +159,6 @@ public class GameManager : MonoBehaviour
     /// <param name="currentState">現在の状態</param>
     private void OnStateChanged(GameEnum.State currentState)
     {
-        Debug.Log(currentState);
-        
         switch (currentState)
         {
             case GameEnum.State.Ready:

@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2504452375904296590}
+  _fadeInDuration: 1
 --- !u!114 &5800651808698547686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3839,7 +3840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _core: {fileID: 3521738536939283414}
-  _stage: {fileID: 2949991812139571455}
+  _stageObject: {fileID: 2949991812139571455}
 --- !u!114 &3939242048015058745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3931,7 +3932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _core: {fileID: 7323895078112484750}
-  _stage: {fileID: 680979177390940184}
+  _stageObject: {fileID: 680979177390940184}
 --- !u!114 &8237693680720458239
 MonoBehaviour:
   m_ObjectHideFlags: 0
