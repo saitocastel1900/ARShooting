@@ -23,7 +23,7 @@ public class TargetAudio : MonoBehaviour
         _core
             .OnHit
             .SkipLatestValueOnSubscribe()
-            .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.Hit1))
+            .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.TargetHit1))
             .AddTo(this);
     }
 }

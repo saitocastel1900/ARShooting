@@ -11,9 +11,9 @@ public static class GameEnum
         None,
         
         /// <summary>
-        /// 初期化
+        /// 準備中
         /// </summary>
-        Initializing,
+        Ready,
         
         /// <summary>
         /// ゲームプレイ

@@ -38,11 +38,11 @@ public class RemainingTargetCounterTextPresenter : MonoBehaviour
     /// </summary>
     private void Bind()
     {
-        //的の残存数が減ったら、データを変更する
+        //的の変わったら、データを変更する
         _targetProvider
             .Targets
-            .ObserveRemove()
-            .Subscribe(_=>_model.Decrement());
+            .ObserveCountChanged()
+            .Subscribe(_model.SetRemainingTargetCount);
         
         //的の残存数が変更された表示も変更
         _model.RemainingTargetCount

@@ -38,7 +38,7 @@ public class Blaster : MonoBehaviour
                 _bullet.GenerateBullet(Camera.main.ScreenToWorldPoint(screenPosition),
                     Camera.main.ScreenPointToRay(screenPosition).direction, _shotPower);
                 
-                _audioManager.PlaySoundEffect(SoundEffect.Shot);
+                _audioManager.PlaySoundEffect(SoundEffect.Shot1);
             })
             .AddTo(this);
     }

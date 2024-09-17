@@ -23,7 +23,7 @@ public class GroundAudio : MonoBehaviour
         _core
             .OnHitPos
             .SkipLatestValueOnSubscribe()
-            .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.Hit2))
+            .Subscribe(isHit => _audioManager.PlaySoundEffect(SoundEffect.GroundHit2))
             .AddTo(this);
     }
 }

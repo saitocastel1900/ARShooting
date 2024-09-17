@@ -1,0 +1,19 @@
+{
+    "name": "TitleWidgetAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:3e75296eded51044eb9a5507a73d7ff5",
+        "GUID:276e66da487f58043a695885c88d5d8b",
+        "GUID:72dff67bf7176f548b8e49934221a64a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

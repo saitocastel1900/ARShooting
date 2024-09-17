@@ -1,29 +1,20 @@
+using System;
 using UniRx;
 using UnityEngine;
-using Zenject;
 
 /// <summary>
-/// ダイアログを管理する
+/// リザルトを管理する
 /// </summary>
 public class ResultDialogWidgetController : MonoBehaviour
 {
-    /// <summary>
-    /// Canvas
-    /// </summary>
-    [SerializeField] private Canvas _dailogCanvas;
-    
-    /// <summary>
-    /// ResultManager
-    /// </summary>
-    [Inject] private ResultManager _resultManager;
-    
-    private void Start()
-    {
-        //的をすべて当てたら、リザルトダイアログを表示する
-        _resultManager
-            .IsShowResultDialog
-            .Where(x=>x==true)
-            .Subscribe(x=>_dailogCanvas.enabled = x)
-            .AddTo(this.gameObject);
-    }
+   /// <summary>
+   /// ダイアログを表示するか
+   /// </summary>
+   public IObservable<Unit> OnShowDialogWidgetAsObservable => _dialogWidgetSubject;
+   private Subject<Unit> _dialogWidgetSubject = new Subject<Unit>();
+   
+   /// <summary>
+   /// リザルト表示を開始する
+   /// </summary>
+   public void StartResult() => _dialogWidgetSubject.OnNext(Unit.Default);
 }
